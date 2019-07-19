@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cy.sys.pojo.JsonResult;
-
+//tyguyhuyhu
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	//JDK中的自带的日志API
