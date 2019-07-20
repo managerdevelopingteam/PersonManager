@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.sys.dao.SysTrainDao">
+	<!-- 查询所有培训信息 -->
+	<select id="findObjects" resultType="com.cy.sys.pojo.SysTrain">
+		select
+		id,tn_man tnMan,tn_content tnContent,
+		tn_time tnTime,tn_address tnAddress,
+		tn_join tnJoin,tn_bz tnBz,tn_title tnTitle
+		from tb_train
+	</select>
+
+	<!-- 插入一条培训数据 -->
+	<insert id="addTrainObject">
+		insert into tb_train 
+		(id,tn_man,tn_content,tn_time,tn_address,tn_join,tn_bz,tn_title) 
+		values
+		(null,#{tnMan},#{tnContent},#{tnTime},#{tnAddress},#{tnJoin},#{tnBz},#{tnTitle})
+	</insert>
+	<!-- 根据id查询培训的详细信息 -->
+	<select id="findTrainObjectById" resultType="com.cy.sys.pojo.SysTrain">
+		select 
+		id,tn_man tnMan,tn_content tnContent,
+		tn_time tnTime,tn_address tnAddress,
+		tn_join tnJoin,tn_bz tnBz,tn_title tnTitle
+		from tb_train
+		where id=#{id}
+	</select>
+	<!-- 根据id删除培训信息  -->
+	<delete id="deleteTrainObjectById">
+		delete
+		from tb_train
+		where id=#{id}
+	</delete>
+</mapper>
