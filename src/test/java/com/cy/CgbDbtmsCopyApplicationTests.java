@@ -16,7 +16,7 @@ import com.cy.sys.service.impl.SysTrainServiceImpl;
 @SpringBootTest
 public class CgbDbtmsCopyApplicationTests {
 	@Autowired
-	private SysTrainServiceImpl dao;
+	private SysTrainServiceImpl TrainDao;
 	@Test
 	public void contextLoads() {
 	}
@@ -25,7 +25,7 @@ public class CgbDbtmsCopyApplicationTests {
 	 */
 	@Test
 	public void trainFindObjects() {
-		List<SysTrain> list = dao.findObjects();
+		List<SysTrain> list = TrainDao.findObjects();
 		for (SysTrain train : list) {
 			System.out.println(train.toString());
 		}
@@ -46,7 +46,7 @@ public class CgbDbtmsCopyApplicationTests {
 		train.setTnAddress("实训三教室");
 		JsonResult result = new JsonResult();
 		result.setData(train);
-		int rows = dao.addTrainObject(train);
+		int rows = TrainDao.addTrainObject(train);
 		System.out.println(rows+"行");
 	}
 	/**
@@ -55,7 +55,7 @@ public class CgbDbtmsCopyApplicationTests {
 	@Test
 	public void findTrainObjectById() {
 		Integer id = 3;
-		SysTrain train = dao.findTrainObjectById(id);
+		SysTrain train = TrainDao.findTrainObjectById(id);
 		System.out.println(train.toString());
 	}
 	/**
@@ -64,7 +64,7 @@ public class CgbDbtmsCopyApplicationTests {
 	@Test
 	public void deleteTrainObjectById() {
 		Integer id = 3;
-		int rows = dao.deleteTrainObjectById(id);
+		int rows = TrainDao.deleteTrainObjectById(id);
 		System.out.println(rows);
 	}
 
