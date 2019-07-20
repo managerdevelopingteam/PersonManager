@@ -8,12 +8,7 @@
       <!-- form start -->
       <form class="form-horizontal">
         <div class="box-body">
-        	<div class="form-group">
-            <label for="name" class="col-sm-2 control-label">用户名称</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control"  id="name" placeholder="名称">
-            </div>
-          </div>
+        	
         	 <div class="form-group">
             <label for="dtName" class="col-sm-2 control-label">部门名称</label>
             <div class="col-sm-10">
@@ -97,7 +92,6 @@
   });
   //初始化表单数据
   function doInitEditFormData(rowData){
-	$("#name").val(rowData.name);  
 	$("#dtName").val(rowData.dtName);  
 	$("#createTime").val(rowData.createTime);  
 	$("#dtBz").val(rowData.dtBz);  
@@ -131,7 +125,6 @@
   }
   function doGetEditFormData(){
 	  var params={
-	     "name":$("#name").val(),
 	     "dtName":$("#dtName").val(),
 	     "createTime":$("#createTime").val(),
 	     "dtBz":$("#dtBz").val()
