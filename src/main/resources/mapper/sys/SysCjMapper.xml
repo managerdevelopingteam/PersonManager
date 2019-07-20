@@ -55,7 +55,7 @@
 		where id=#{id}
 	</delete>
 <!--通过cjTitle（奖惩主题）修改信息  -->
-	 <update id="updateByCjTitle" resultType="com.cy.sys.pojo.SysCj>
+	 <update id="updateByCjTitle">
 		update sys_cj
         set cjTitle=#{cjTitle},
            cjType=#{cjType},

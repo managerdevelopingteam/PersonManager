@@ -9,9 +9,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cy.sys.pojo.JsonResult;
+import com.cy.sys.pojo.Node;
 import com.cy.sys.pojo.SysCj;
+import com.cy.sys.pojo.SysPay;
 import com.cy.sys.pojo.SysTrain;
 import com.cy.sys.service.SysCjService;
+import com.cy.sys.service.SysPayService;
 import com.cy.sys.service.impl.SysTrainServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -21,6 +24,8 @@ public class CgbDbtmsCopyApplicationTests {
 	private SysTrainServiceImpl TrainDao;
 	@Autowired
 	private SysCjService cj;
+	@Autowired
+	private SysPayService pay;
 	@Test
 	public void contextLoads() {
 	}
@@ -102,4 +107,36 @@ public class CgbDbtmsCopyApplicationTests {
 		int rows = cj.deleteObjectById(100);
 		System.out.println(rows);
 	}
+	
+	@Test
+	public void findPayObjects() {
+		List<SysPay> findObjects = pay.findObjects();
+		JsonResult jsonResult = new JsonResult(findObjects);
+		System.out.println(jsonResult.toString());
+	}
+	@Test
+	public void findPayObjectsByMonth() {
+		List<SysPay> findObjectsByMonth = pay.findObjectsByMonth("2016-01");
+		JsonResult jsonResult = new JsonResult(findObjectsByMonth);
+		System.out.println(jsonResult.toString());
+	}
+	@Test
+	public void deletePayObjectById() {
+		int deleteObjectById = pay.deleteObjectById(5);
+		System.out.println(deleteObjectById);
+	}
+	@Test
+	public void findPayObjectByName() {
+		List<SysPay> findObjectsByName = pay.findObjectsByName("*");
+		JsonResult jsonResult = new JsonResult(findObjectsByName);
+		System.out.println(jsonResult.toString());
+	}
+	@Test
+	public void findObjectsByEmployee() {
+		List<Node> findObjectsByEmployee = pay.findObjectsByEmployee();
+		for (Node node : findObjectsByEmployee) {
+			System.out.println(node.toString());
+		}
+	}
+	
 }
