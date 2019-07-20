@@ -3,7 +3,7 @@
 	<div class="col-xs-12">
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">部门管理</h3>
+				<h3 class="box-title">薪资管理</h3>
 
 				<div class="box-tools" align="right">
 					<div class="input-group input-group-sm" style="width: 350px;">
@@ -14,7 +14,7 @@
 							<button type="button" class="btn btn-default btn-search">
                                 <i class="fa fa-search"></i>
 							</button>
-							<button type="button" class="btn btn-default btn-add">添加部门信息</button>
+							<button type="button" class="btn btn-default btn-add">添加薪资信息</button>
 						</div>
 					</div>
 				</div>
@@ -25,11 +25,16 @@
 				  <table class="table table-hover">
 					<thead>
 						<tr>
-						    <th>序号</th>
-						    <th>用户名</th>
-						    <th>部门名称</th>
-							<th>创建时间</th>
-							<th>备注</th>
+						    <th>员工编号</th>
+							<th>员工姓名</th>
+							<th>当前月份</th>
+							<th>基本工资</th>
+							<th>加班费</th>
+							<th>工龄费</th>
+							<th>考勤费</th>
+							<th>旷工费</th>
+							<th>保险费</th>
+							<th>实发工资</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -56,7 +61,6 @@
       
 	  $("#tbodyId")
 	  .on("click",".btn-delete",doDeleteObject)
-	  .on("click",".btn-update",doLoadEditUI)
    });
    
     function doLoadEditUI(){
@@ -68,7 +72,7 @@
 		   title="修改角色"
 		   var id=$(this).parents("tr").data("id");
 		   var params={"id":id};
-		   var url="department/doFindObjectById";
+		   var url="pay/doFindObjectById";
 		   $.getJSON(url,params,function(result){
 			   if(result.state==1){
 				  result.data.id=id;//在结果中动态追加id
@@ -81,7 +85,7 @@
 	   }
    } 
    function doLoadPageUI(title){
-	   var url="sys/department_edit"
+	   var url="sys/pay_edit"
 	   $("#mainContentId")
 	   .load(url,function(){
 		   $(".box-title").html(title);
@@ -95,7 +99,7 @@
 	   var id=$(this).parents("tr").data("id");
 	   var params={"id":id};
 	   //2.url
-	   var url="department/doDeleteObject"
+	   var url="pay/doDeleteObject"
 	   //3.ajax request
 	   $.post(url,params,function(result){
 		   if(result.state==1){
@@ -123,7 +127,7 @@
 	   var name=$("#searchNameId").val(); 
 	   if(name)params.name=name; 
 	   //2.url
-	   var url="department/doFindPageObjects";
+	   var url="pay/doFindPageObjects";
 	   //3.ajax request
 	   console.log(params);
 	   $.getJSON(url,params,function(result){
@@ -173,15 +177,20 @@
 		  tBody.append(tr);
 	   }
    }
-   function doCreateTds(row,i){
+   function doCreateTds(data){
 	   var tds=
-	   "<td>"+row.id+"</td>"+
-	   "<td>"+row.name+"</td>"+
-	   "<td>"+row.dtName+"</td>"+
-	   "<td>"+row.createTime+"</td>"+
-	   "<td>"+row.dtBz+"</td>"+
-	   "<td><a class='btn-delete'>delete</a>"+
-       "&nbsp;<a class='btn-update'>update</a></td>";
+	   "<td>"+data.pay_emNumber+"</td>"+
+	   "<td>"+data.pay_emName+"</td>"+
+	   "<td>"+data.pay_month+"</td>"+
+	   "<td>"+data.pay_baseMoney+"</td>"+
+	   "<td>"+data.pay_overtime*20+"</td>"+
+	   "<td>"+data.pay_age*50+"</td>"+
+	   "<td>"+data.pay_check+"</td>"+
+	   "<td>"+data.pay_absent+"</td>"+
+	   "<td>"+data.pay_safety+"</td>"+
+	   "<td>"+data.pay_baseMoney+data.pay_overtime*20+data.pay_age*50+data.pay_check-data.pay_absent-data.pay_safety+"</td>"+
+	   "<td><a class='btn-delete'>删除</a>"+
+	
        
        return tds;
    }

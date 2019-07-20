@@ -1,0 +1,114 @@
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>人力资源管理系统--系统管理</title>
+		<link type="text/css" rel="stylesheet" href="../css/style.css">
+	</head>
+	<script language="JavaScript">
+		function insertManager() {
+			if(document.managerForm.account.value == "") {
+				window.alert("请输入账号");
+				return false;
+			}
+			if(!isNaN(managerForm.account.value)) {
+				window.alert("您输入账号不能完全是数字");
+				return false;
+			}
+			if(document.managerForm.password.value == "") {
+				window.alert("请输入密码");
+				return false;
+			}
+			if(document.managerForm.newPassword.value == "") {
+				window.alert("请输入确认密码");
+				return false;
+			}
+			if(document.managerForm.password.value != document.managerForm.newPassword.value) {
+				window.alert("您输入的新密码与确认密码确认不一致");
+				return false;
+			}
+			return true;
+		}
+	</script>
+
+	<body>
+		<table width="801" height="167" border="0" cellpadding="0" cellspacing="0" align="center">
+			<tr>
+				<td><img src="../images/top1.jpg" width="801" height="60" border="0" usemap="#Map"></td>
+			</tr>
+			<tr>
+				<td><img src="../images/top2.jpg" width="801" height="107"></td>
+			</tr>
+		</table>
+		<table width="801" height="34" border="0" cellpadding="0" cellspacing="0" background="../images/top3.jpg" align="center">
+			<tr>
+				<td width="532" align="right" valign="top" />
+				<td width="88">
+					<a href="manager_update.jsp" onClick="javascript:;" onMouseOver="MM_swapImage('Image1','','../images/top-11.gif',1)" onMouseOut="MM_swapImgRestore()">
+						<img src="../images/top-1.gif" name="Image1" width="85" height="34" border="0" id="Image1"></a>
+				</td>
+				<td width="88">
+					<a href="mainPage.jsp" onClick="javascript:;" onMouseOver="MM_swapImage('Image2','','../images/top-22.gif',1)" onMouseOut="MM_swapImgRestore()">
+						<img src="../images/top-2.gif" name="Image2" width="85" height="34" border="0" id="Image2"></a>
+				</td>
+				<td width="93">
+					<a href="javascript:quit()" onClick="javascript:;" onMouseOver="MM_swapImage('Image3','','../images/top-33.gif',1)" onMouseOut="MM_swapImgRestore()">
+						<img src="../images/top-3.gif" name="Image3" width="85" height="34" border="0" id="Image3"></a>
+				</td>
+			</tr>
+		</table>
+		<!--top-->
+		<table width="801" height="436" border="0" cellpadding="0" cellspacing="0" background="../images/center2.jpg" align="center">
+			<tr>
+				<td height="243" valign="center" align="center">
+					<form action="manager.do?method=insertManager" onsubmit="return insertManager()">
+						<table width="265" border="1" align="center" cellpadding="1" cellspacing="1" bordercolor="#FFFFFF" bgcolor="66583D">
+							<tr>
+								<th width="70" height="30">
+									<div align="right" class="word_white">账号：</div>
+								</th>
+								<td width="183" bgcolor="#FFFFFF">
+									<input type="text" name="username"/>
+								</td>
+							</tr>
+							<tr>
+								<th height="30">
+									<div align="right" class="word_white">密码：</div>
+								</th>
+								<td bgcolor="#FFFFFF">
+									<input type="password" name="pwd"/>
+								</td>
+							</tr>
+							<tr>
+								<th height="30">
+									<div align="right" class="word_white">确认密码：</div>
+								</th>
+								<td bgcolor="#FFFFFF"><input type="password" name="newPassword"></td>
+							</tr>
+							<tr>
+								<th height="30">
+									<div align="right" class="word_white">级别：</div>
+								</th>
+								<td bgcolor="#FFFFFF">
+									<hidden property="managerLevel" value="0" />普通</td>
+							</tr>
+						</table>
+						<br>
+						<input type="submit" value="保存" /> &nbsp;&nbsp;
+						<input type="reset"></input>
+						&nbsp;&nbsp;
+						<input type="button" property="button" value="返回" onclick="javascript:history.go(-1);" />
+					</form>
+				</td>
+			</tr>
+		</table>
+		<!--down-->
+		<table width="100" border="0" cellpadding="0" cellspacing="0" align="center">
+			<tr>
+				<td><img src="../images/down.jpg" width="801" height="72"></td>
+			</tr>
+		</table>
+
+	</body>
+
+</html>
