@@ -68,7 +68,7 @@
 		   title="详查"
 		   var id=$(this).parents("tr").data("id");
 		   var params={"id":id};
-		   var url="train/doFindObjectById";
+		   var url="train/doFindObjectByTnMan";
 		   $.getJSON(url,params,function(result){
 			   if(result.state==1){
 				  result.data.id=id;//在结果中动态追加id
@@ -121,7 +121,7 @@
 	   var params={"pageCurrent":pageCurrent};
 	   //获取查询时用户输入的名字
 	   var name=$("#searchNameId").val(); 
-	   if(name)params.name=name; 
+	   if(name)params.tnMan=name; 
 	   //2.url
 	   var url="train/doFindPageObjects";
 	   //3.ajax request

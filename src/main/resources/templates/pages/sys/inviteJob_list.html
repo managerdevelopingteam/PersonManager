@@ -66,12 +66,12 @@
 			title = "添加信息";
 			doLoadPageUI(title);
 		} else {
-			title = "修改角色"
+			title = "详查"
 			var id = $(this).parents("tr").data("id");
 			var params = {
 				"id": id
 			};
-			var url = "inviteJob/doFindObjectById";
+			var url = "inviteJob/doFindObjectByName";
 			$.getJSON(url, params, function(result) {
 				if(result.state == 1) {
 					result.data.id = id; //在结果中动态追加id
@@ -136,7 +136,7 @@
 		};
 		//获取查询时用户输入的名字
 		var name = $("#searchNameId").val();
-		if(name) params.name = name;
+		if(name) params.name=name;
 		//2.url
 		var url = "inviteJob/doFindPageObjects";
 		//3.ajax request
@@ -194,13 +194,12 @@
 
 	function doCreateTds(data) {
 		var tds =
-			"<td>" + data.emSerialNumber + "</td>" +
-			"<td>" + data.emName + "</td>" +
-			"<td>" + data.emSex + "</td>" +
-			"<td>" + data.emDepartmentId + "</td>" +
-			"<td>" + data.emTypeWork + "</td>" +
-			"<td>" + data.emCulture + "</td>"+
-			"<td>" + data.createTime + "</td>"+
+			"<td>" + data.id + "</td>" +
+			"<td>" + data.name + "</td>" +
+			"<td>" + data.sex + "</td>" +
+			"<td>" + data.job + "</td>" +
+			"<td>" + data.Culture + "</td>" +
+			"<td>" + data.experience + "</td>"+
 			"<td><a class='btn-delete'>删除</a>"+
        "&nbsp;<a class='btn-Detailed'>详查</a></td>";
        "&nbsp;<a class='btn-Hire'>录用</a></td>";

@@ -66,12 +66,12 @@
 			title = "添加信息";
 			doLoadPageUI(title);
 		} else {
-			title = "修改角色"
+			title = "修改"
 			var id = $(this).parents("tr").data("id");
 			var params = {
 				"id": id
 			};
-			var url = "employee/doFindObjectById";
+			var url = "employee/doFindObjectByEmName";
 			$.getJSON(url, params, function(result) {
 				if(result.state == 1) {
 					result.data.id = id; //在结果中动态追加id
@@ -129,7 +129,7 @@
 		};
 		//获取查询时用户输入的名字
 		var name = $("#searchNameId").val();
-		if(name) params.name = name;
+		if(name) params.emName = name;
 		//2.url
 		var url = "employee/doFindPageObjects";
 		//3.ajax request
