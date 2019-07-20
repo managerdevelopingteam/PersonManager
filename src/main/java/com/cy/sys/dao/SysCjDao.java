@@ -8,8 +8,6 @@ import org.apache.ibatis.annotations.Param;
 
 import com.cy.sys.pojo.SysCj;
 
-
-
 @Mapper
 public interface SysCjDao {
 	/*
@@ -21,15 +19,23 @@ public interface SysCjDao {
 	 * 
 	 * @Param("pageSize")Integer pageSize); int insertObject(SysCj entity);
 	 */
-	
-	//查询表中所有数据
-	List<SysCj> findObjects();
-	//向表中添加新数据
+	int getRowCounts(@Param("cjTitle") String cjTitle);
+
+	// 查询表中所有数据
+	List<SysCj> findPageObjects(@Param("cjTitle") String cjTitle, @Param("startIndex") Integer startIndex,
+			@Param("pageSize") Integer pageSize);
+
+	// 向表中添加新数据
 	int addCjObject(SysCj entity);
-	//根据奖惩主题模糊查询
-	List<SysCj> findObjectByCjTitle(String cjTitle);
-	//根据id删除记录
+
+	// 根据奖惩主题模糊查询
+	List<SysCj> findObject(String cjTitle);
+
+	
+
+	// 根据id删除记录
 	int deleteObjectById(Integer id);
-	//通过cjTitle（奖惩主题）修改信息
-    int updateByCjTitle(SysCj entity);
+
+	// 通过id修改信息
+	int updateByCjTitle(SysCj id);
 }

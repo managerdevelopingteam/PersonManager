@@ -1,10 +1,12 @@
 package com.cy.sys.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cy.sys.pojo.JsonResult;
@@ -33,8 +35,9 @@ public class SysCjController {
 	// 查询表中所有数据
 
 	@RequestMapping("doFindPageObjects")
-	public JsonResult doFindObjects() {
-		List<SysCj> Objects = sysCjService.findObjects();
+	public JsonResult doFindObjects(String cjTitle, Integer pageCurrent) {
+
+		PageObject<SysCj> Objects = sysCjService.findPageObjects(cjTitle, pageCurrent);
 		return new JsonResult(Objects);
 	}
 
@@ -46,12 +49,19 @@ public class SysCjController {
 	}
 
 	// 根据奖惩主题模糊查询
-	@RequestMapping("doFindObjectByCjTitle")
-	public JsonResult doFindObjectByCjTitle(String cjTitle) {
-		sysCjService.findObjectByCjTitle(cjTitle);
-		return new JsonResult("find ok");
-	}
 
+	/*
+	 * @RequestMapping("doFindObjectByCjTitle") public JsonResult
+	 * doFindObjectByCjTitle(String cjTitle) { sysCjService.findObject(cjTitle);
+	 * return new JsonResult("find ok"); }
+	 */
+
+	//@RequestMapping("doFindObjectByCjTitle")
+	public JsonResult doFindObject(String cjTitle) {
+		List<SysCj> findObject = sysCjService.findObject(cjTitle);
+		return new JsonResult(findObject);
+		
+	}
 	// 根据id删除记录
 	@RequestMapping("doDeleteObject")
 	public JsonResult doDeleteObjectById(Integer id) {
@@ -60,7 +70,7 @@ public class SysCjController {
 	}
 
 	// 通过cjTitle（奖惩主题）修改信息
-	@RequestMapping("doUpdateObjectByCjTitle")
+	@RequestMapping("doUpdateObject")
 	public JsonResult doUpdateObjectByCjTitle(SysCj entity) {
 		sysCjService.updateObject(entity);
 		return new JsonResult("update ok");

@@ -26,9 +26,11 @@ public class CgbDbtmsCopyApplicationTests {
 	private SysCjService cj;
 	@Autowired
 	private SysPayService pay;
+
 	@Test
 	public void contextLoads() {
 	}
+
 	/**
 	 * test查询所有培训数据
 	 */
@@ -39,13 +41,14 @@ public class CgbDbtmsCopyApplicationTests {
 			System.out.println(train.toString());
 		}
 	}
+
 	/**
 	 * test插入培训数据
 	 */
 	@Test
 	public void addTrainObject() {
 		SysTrain train = new SysTrain();
-		//train.setId(2);
+		// train.setId(2);
 		train.setTnMan("赵帅");
 		train.setTnJoin("张三,李四");
 		train.setTnTime("2019-7-18");
@@ -56,8 +59,9 @@ public class CgbDbtmsCopyApplicationTests {
 		JsonResult result = new JsonResult();
 		result.setData(train);
 		int rows = TrainDao.addTrainObject(train);
-		System.out.println(rows+"行");
+		System.out.println(rows + "行");
 	}
+
 	/**
 	 * test根据id查询培训数据
 	 */
@@ -67,6 +71,7 @@ public class CgbDbtmsCopyApplicationTests {
 		SysTrain train = TrainDao.findTrainObjectById(id);
 		System.out.println(train.toString());
 	}
+
 	/**
 	 * test根据id删除培训信息
 	 */
@@ -84,6 +89,7 @@ public class CgbDbtmsCopyApplicationTests {
 			System.out.println(sysCj.toString());
 		}
 	}
+
 	@Test
 	public void insertCjObject() {
 		SysCj entity = new SysCj();
@@ -95,42 +101,48 @@ public class CgbDbtmsCopyApplicationTests {
 		int rows = cj.saveObject(entity);
 		System.out.println(rows);
 	}
+
 	@Test
 	public void fingObjectByCjTitle() {
-		List<SysCj> findObjectByCjTitle = cj.findObjectByCjTitle("羽毛球");
+		List<SysCj> findObjectByCjTitle = cj.findObject("羽毛球");
 		for (SysCj sysCj : findObjectByCjTitle) {
 			System.out.println(sysCj.toString());
 		}
 	}
+
 	@Test
 	public void deleteCjById() {
 		int rows = cj.deleteObjectById(100);
 		System.out.println(rows);
 	}
-	
+
 	@Test
 	public void findPayObjects() {
 		List<SysPay> findObjects = pay.findObjects();
 		JsonResult jsonResult = new JsonResult(findObjects);
 		System.out.println(jsonResult.toString());
 	}
+
 	@Test
 	public void findPayObjectsByMonth() {
 		List<SysPay> findObjectsByMonth = pay.findObjectsByMonth("2016-01");
 		JsonResult jsonResult = new JsonResult(findObjectsByMonth);
 		System.out.println(jsonResult.toString());
 	}
+
 	@Test
 	public void deletePayObjectById() {
 		int deleteObjectById = pay.deleteObjectById(5);
 		System.out.println(deleteObjectById);
 	}
+
 	@Test
 	public void findPayObjectByName() {
 		List<SysPay> findObjectsByName = pay.findObjectsByName("*");
 		JsonResult jsonResult = new JsonResult(findObjectsByName);
 		System.out.println(jsonResult.toString());
 	}
+
 	@Test
 	public void findObjectsByEmployee() {
 		List<Node> findObjectsByEmployee = pay.findObjectsByEmployee();
@@ -138,5 +150,5 @@ public class CgbDbtmsCopyApplicationTests {
 			System.out.println(node.toString());
 		}
 	}
-	
+
 }

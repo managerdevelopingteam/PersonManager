@@ -15,8 +15,7 @@ import lombok.ToString;
 public class SysCj implements Serializable{
 	
 	private static final long serialVersionUID = 4974235283704833044L;
-	private int id;
-	//private String name;
+	private Integer id;
 	private String cjTitle;
 	private String cjType;
 	private String cjContent;

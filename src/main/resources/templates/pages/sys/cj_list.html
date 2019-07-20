@@ -8,7 +8,7 @@
 				<div class="box-tools" align="right">
 					<div class="input-group input-group-sm" style="width: 350px;">
 						<input type="text" name="table_search" id="searchNameId"
-							class="form-control pull-right" placeholder="角色名">
+							class="form-control pull-right" placeholder="序号">
 
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-default btn-search"><i class="fa fa-search"></i></button>
@@ -23,6 +23,7 @@
 				  <table class="table table-hover">
 					<thead>
 						<tr>
+							<th>序号</th>
 							<th>奖惩主题</th>
 							<th>奖惩类型</th>
 							<th>奖惩内容</th>
@@ -66,7 +67,7 @@
 		   title="修改角色"
 		   var id=$(this).parents("tr").data("id");
 		   var params={"id":id};
-		   var url="cj/doFindObjectByCjTitle";
+		   var url="cj/doFindObjectById";
 		   $.getJSON(url,params,function(result){
 			   if(result.state==1){
 				  result.data.id=id;//在结果中动态追加id
@@ -90,6 +91,7 @@
    
    function doDeleteObject(){
 	   //1.params
+	  
 	   var id=$(this).parents("tr").data("id");
 	   var params={"id":id};
 	   //2.url
@@ -118,8 +120,8 @@
 	   //var params="pageCurrrent="+pageCurrent;
 	   var params={"pageCurrent":pageCurrent};
 	   //获取查询时用户输入的名字
-	   var name=$("#searchNameId").val(); 
-	   if(name)params.name=name; 
+	   var id=$("#searchNameId").val(); 
+	   if(id)params.id=id; 
 	   //2.url
 	   var url="cj/doFindPageObjects";
 	   //3.ajax request
@@ -173,6 +175,7 @@
    }
    function doCreateTds(data){
 	   var tds=
+	   "<td>"+data.id+"</td>"+
 	   "<td>"+data.cjTitle+"</td>"+
 	   "<td>"+data.cjType+"</td>"+
 	   "<td>"+data.cjContent+"</td>"+
