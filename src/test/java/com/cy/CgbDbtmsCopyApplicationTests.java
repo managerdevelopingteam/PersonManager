@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.cy.sys.pojo.JsonResult;
+import com.cy.sys.pojo.SysCj;
 import com.cy.sys.pojo.SysTrain;
+import com.cy.sys.service.SysCjService;
 import com.cy.sys.service.impl.SysTrainServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -17,6 +19,8 @@ import com.cy.sys.service.impl.SysTrainServiceImpl;
 public class CgbDbtmsCopyApplicationTests {
 	@Autowired
 	private SysTrainServiceImpl TrainDao;
+	@Autowired
+	private SysCjService cj;
 	@Test
 	public void contextLoads() {
 	}
@@ -68,4 +72,34 @@ public class CgbDbtmsCopyApplicationTests {
 		System.out.println(rows);
 	}
 
+	@Test
+	public void findObjects() {
+		List<SysCj> findObjects = cj.findObjects();
+		for (SysCj sysCj : findObjects) {
+			System.out.println(sysCj.toString());
+		}
+	}
+	@Test
+	public void insertCjObject() {
+		SysCj entity = new SysCj();
+		entity.setCjTitle("早退");
+		entity.setCjType("1");
+		entity.setCjMoney("-200");
+		entity.setCreateTime("2079-7-18");
+		entity.setCjContent("罚他");
+		int rows = cj.saveObject(entity);
+		System.out.println(rows);
+	}
+	@Test
+	public void fingObjectByCjTitle() {
+		List<SysCj> findObjectByCjTitle = cj.findObjectByCjTitle("羽毛球");
+		for (SysCj sysCj : findObjectByCjTitle) {
+			System.out.println(sysCj.toString());
+		}
+	}
+	@Test
+	public void deleteCjById() {
+		int rows = cj.deleteObjectById(100);
+		System.out.println(rows);
+	}
 }

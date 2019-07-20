@@ -28,7 +28,42 @@
     </insert>
 	
 
+    <!-- 查询表中所有数据 -->
+	<select id="findObjects" resultType="com.cy.sys.pojo.SysCj">
 
+		select id, cjTitle, cjType, cjContent,
+		 cjMoney,createTime
+		from sys_cj;
+	</select>
+	<!-- 向表中添加新数据 -->
+	<insert id="addCjObject">
+		insert into sys_cj
+		(cjTitle, cjType, cjContent,cjMoney,createTime)
+		values
+		(#{cjTitle},#{cjType},#{cjContent},#{cjMoney},#{createTime})
+	</insert>
+	<!-- 根据奖惩主题模糊查询-->
+	<select id="findObjectByCjTitle" resultType="com.cy.sys.pojo.SysCj">
+		select id,cjTitle,cjType,cjContent,cjMoney,createTime
+		from sys_cj 
+		where cjTitle like concat("%",#{cjTitle},"%")
+	</select>
+	<!-- 根据id删除记录 -->
+	<delete id="deleteObjectById">
+		delete 
+		from sys_cj
+		where id=#{id}
+	</delete>
+<!--通过cjTitle（奖惩主题）修改信息  -->
+	 <update id="updateByCjTitle" resultType="com.cy.sys.pojo.SysCj>
+		update sys_cj
+        set cjTitle=#{cjTitle},
+           cjType=#{cjType},
+           cjContent=#{cjContent},
+           cjMoney=#{cjMoney},
+           createTime=#{parentId},
+        where cjTitle=#{cjTitle}
+	</update>
 
 
 </mapper>
