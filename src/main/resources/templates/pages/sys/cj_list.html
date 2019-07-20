@@ -11,10 +11,8 @@
 							class="form-control pull-right" placeholder="角色名">
 
 						<div class="input-group-btn">
-							<button type="button" class="btn btn-default btn-search">
-                                <i class="fa fa-search"></i>
-							</button>
-							<button type="button" class="btn btn-default btn-add">添加奖惩信息</button>
+							<button type="button" class="btn btn-default btn-search"><i class="fa fa-search"></i></button>
+							<button type="button" class="btn btn-default btn-add">添加</button>
 						</div>
 					</div>
 				</div>
@@ -31,6 +29,7 @@
 							<th>奖惩内容</th>
 							<th>奖惩金额</th>
 							<th>奖惩时间</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody id="tbodyId">
@@ -180,8 +179,9 @@
 	   "<td>"+data.cjType+"</td>"+
 	   "<td>"+data.cjContent+"</td>"+
 	   "<td>"+data.cjMoney+"</td>"+
-	   "<td>"+data.createTime+"</td>"
-       
+	   "<td>"+data.createTime+"</td>"+
+       "<td><a class='btn-delete'>删除</a>"+
+       "&nbsp;<a class='btn-update'>修改</a></td>";
        return tds;
    }
 </script>

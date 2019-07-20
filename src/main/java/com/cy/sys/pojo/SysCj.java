@@ -18,7 +18,7 @@ public class SysCj implements Serializable{
 	private int id;
 	private String name;
 	private String cjTitle;
-	private Integer cjType=1;
+	private String cjType;
 	private String cjContent;
 	private String cjMoney;
 	private String createTime;

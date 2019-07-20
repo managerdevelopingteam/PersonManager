@@ -2,7 +2,7 @@
 <!-- Horizontal Form -->
  <div class="box box-info">
       <div class="box-header with-border">
-        <h3 class="box-title">人力资源管理系统--奖惩管理</h3>
+        <h3 class="box-title">薪资添加</h3>
       </div>
       <!-- /.box-header -->
       <!-- form start -->
@@ -10,42 +10,52 @@
        <div class="box-body">
          
           <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">用户名称</label>
+            <label for="name" class="col-sm-2 control-label">姓名</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control"  id="name" placeholder="名称">
+              <input type="text" class="form-control"  id="name" placeholder="姓名">
             </div>
           </div>
           <div class="form-group">
-            <label for="cjTitle" class="col-sm-2 control-label">奖惩题目</label>
+            <label for="cjTitle" class="col-sm-2 control-label">发放时间</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control "  id="cjTitle" placeholder="奖惩题目">
-            </div>
-          </div>
-           <div class="form-group">
-            <label for="cjType" class="col-sm-2 control-label">类型</label>
-            <div class="col-sm-10 typeRadio">
-              	<label class="radio-inline">
-				<input type="radio" name="cjType" value="1" checked> 奖励</label>
-				<label class="radio-inline">
-				<input type="radio" name="cjType" value="2"> 惩罚 </label>
+              <input type="text" class="form-control "  id="cjTitle" placeholder="发放时间">
             </div>
           </div>
           <div class="form-group">
-            <label for="cjContent" class="col-sm-2 control-label">奖惩内容</label>
+            <label for="cjTitle" class="col-sm-2 control-label">基本工资</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control"  id="cjContent" placeholder="奖惩内容">
+              <input type="text" class="form-control "  id="cjTitle" placeholder="基本工资">
+            </div>
+          </div>
+           
+          <div class="form-group">
+            <label for="cjContent" class="col-sm-2 control-label">加班次数</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  id="cjContent" placeholder="加班次数">
             </div>
           </div>
           <div class="form-group">
-			<label for="cjMoney" class="col-sm-2 control-label">奖惩金额</label>
+			<label for="cjMoney" class="col-sm-2 control-label">工龄</label>
 			<div class="col-sm-10">
-				<input type="text" id="cjMoney" placeholder="奖惩金额" class="form-control">
+				<input type="text" id="cjMoney" placeholder="工龄" class="form-control">
 			</div>
 		  </div>
 		  <div class="form-group">
-				<label for="createTime" class="col-sm-2 control-label">奖惩时间</label>
+				<label for="createTime" class="col-sm-2 control-label">全勤奖</label>
 				<div class="col-sm-10">
-					<input type="text" id="createTime" placeholder="奖惩时间" class="form-control">
+					<input type="text" id="createTime" placeholder="全勤奖" class="form-control">
+				</div>
+		 </div>
+		  <div class="form-group">
+				<label for="createTime" class="col-sm-2 control-label">旷工费</label>
+				<div class="col-sm-10">
+					<input type="text" id="createTime" placeholder="旷工费" class="form-control">
+				</div>
+		 </div>
+		  <div class="form-group">
+				<label for="createTime" class="col-sm-2 control-label">保险费</label>
+				<div class="col-sm-10">
+					<input type="text" id="createTime" placeholder="保险费" class="form-control">
 				</div>
 		 </div>
         </div>
@@ -112,15 +122,18 @@
 //初始化表单数据
   function doInitEditFormData(rowData){
 	$("#name").val(rowData.name);  
-	$("#cjTitle").val(rowData.cjTitle); 
-	$("input[value="+rowData.cjType+"]").prop("checked",true); 
-	$("#cjContent").val(rowData.cjContent);  
-	$("#cjMoney").val(rowData.cjMoney);  
-	$("#createTime").val(rowData.createTime);  
+	$("#pay_emNumber").val(rowData.pay_emNumber); 
+	$("#pay_emName").val(rowData.pay_emName); 
+	$("#pay_month").val(rowData.pay_month); 
+	$("#pay_baseMoney").val(rowData.pay_baseMoney); 
+	$("#pay_age").val(rowData.pay_age);  
+	$("#pay_check").val(rowData.pay_check);  
+	$("#pay_absent").val(rowData.pay_absent);  
+	$("#pay_safety").val(rowData.pay_safety);  
   }
   //回到列表页面
   function doCancel(){
-	var url="sys/cj_list";
+	var url="sys/pay_list";
 	$("#mainContentId").load(url);  
   }
   //将表单数据发送到服务端
@@ -131,8 +144,8 @@
 	 var rowData=$("#mainContentId").data("rowData");
 	 if(rowData)params.id=rowData.id;
 	 //2.异步提交数据到服务端
-	 var insertUrl="cj/doSaveObject";
-	 var updateUrl="cj/doUpdateObject";
+	 var insertUrl="pay/doSaveObject";
+	 var updateUrl="pay/doUpdateObject";
 	 var url=rowData?updateUrl:insertUrl;
 	 
 	 $.post(url,params,function(result){
@@ -147,11 +160,14 @@
    function doGetEditFormData(){
 	  var params={
 	     "name":$("#name").val(),
-	     "cjTitle":$("#cjTitle").val(),
-	     "cjType":$("input[name='cjType']:checked").val(),
-	     "cjContent":$("#cjContent").val(),
-	     "cjMoney":$("#cjMoney").val(),
-	     "createTime":$("#createTime").val()
+	     "pay_emNumber":$("#pay_emNumber").val(),
+	     "pay_emName":$("#pay_emName").val(),
+	     "pay_month":$("#pay_month").val(),
+	     "pay_baseMoney":$("#pay_baseMoney").val(),
+	     "pay_age":$("#pay_age").val(),
+	     "pay_check":$("#pay_check").val(),
+	     "pay_absent":$("#pay_absent").val(),
+	     "pay_safety":$("#pay_safety").val(),
 	  }
 	  return params;
   }
@@ -183,7 +199,7 @@
   //加载zTree菜单
   function doLoadZtreeNodes(){
 	 //1.url
-	 var url="menu/doFindZtreeMenuNodes";
+	 var url="train/doFindZtreeMenuNodes";
 	 //2.request
 	 $.getJSON(url,function(result){//JsonResult
 		 console.log(result);

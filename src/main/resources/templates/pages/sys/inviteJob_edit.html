@@ -2,35 +2,95 @@
 <!-- Horizontal Form -->
  <div class="box box-info">
       <div class="box-header with-border">
-        <h3 class="box-title">部门添加</h3>
+        <h3 class="box-title">员工添加</h3>
       </div>
       <!-- /.box-header -->
       <!-- form start -->
       <form class="form-horizontal">
-        <div class="box-body">
+          
         	<div class="form-group">
-            <label for="name" class="col-sm-2 control-label">用户名称</label>
+            <label for="name" class="col-sm-2 control-label">姓名</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control"  id="name" placeholder="名称">
+              <input type="text" class="form-control"  id="name" placeholder="姓名">
+            </div>
+          </div>
+           <div class="form-group">
+            <label for="sex" class="col-sm-2 control-label">性别</label>
+            <div class="col-sm-10 typeRadio">
+				<input type="radio" name="sex" value="1" checked> 男</label>
+				<input type="radio" name="sex" value="2"> 女 </label>
+            </div>
+          </div>
+        	<div class="form-group">
+            <label for="age" class="col-sm-2 control-label">年龄</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  id="age" placeholder="年龄">
+            </div>
+          </div>
+          
+        	 <div class="form-group">
+            <label for="born" class="col-sm-2 control-label">出生日期</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  id="born" placeholder="出生日期">
             </div>
           </div>
         	 <div class="form-group">
-            <label for="dtName" class="col-sm-2 control-label">部门名称</label>
+            <label for="job" class="col-sm-2 control-label">应聘职位</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control"  id="dtName" placeholder="部门名称">
+              <input type="text" class="form-control"  id="job" placeholder="应聘职位">
+            </div>
+          </div>
+        	 <div class="form-group">
+            <label for="specialty" class="col-sm-2 control-label">专业</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  id="specialty" placeholder="专业">
+            </div>
+          </div>
+        	 <div class="form-group">
+            <label for="experience" class="col-sm-2 control-label">工作经验</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  id="experience" placeholder="工作经验">
+            </div>
+            
+            <div class="form-group">
+            <label for="Culture" class="col-sm-2 control-label">文化程度</label>
+            <div class="col-sm-10">
+            	<input type="checkbox"  name="Culture"  value="研究生" styleClass="input1"/>&nbsp;研究生&nbsp; &nbsp; 
+              	<input type="checkbox"  name="Culture"  value="本科生" styleClass="input1"/>&nbsp;本科生&nbsp;  &nbsp; 
+              	<input type="checkbox" name="Culture"   value="大专生" styleClass="input1"/>&nbsp;大专生</td>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="tel" class="col-sm-2 control-label">联系电话</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  id="tel" placeholder="联系电话">
             </div>
           </div>
           
           <div class="form-group">
-            <label for="createTime" class="col-sm-2 control-label">创建时间</label>
+            <label for="afterSchool" class="col-sm-2 control-label">毕业学校</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control"  id="createTime" placeholder="创建时间">
+              <input type="text" class="form-control"  id="afterSchool" placeholder="毕业学校">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="address" class="col-sm-2 control-label">家庭住址</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  id="address" placeholder="家庭住址">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="createtime" class="col-sm-2 control-label">登记时间</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  id="createtime" placeholder="登记时间">
             </div>
           </div>
           <div class="form-group">
-            <label for="dtBz" class="col-sm-2 control-label">备注信息</label>
+            <label for="content" class="col-sm-2 control-label">个人简介</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control"  id="dtBz" placeholder="备注信息">
+              <input type="text" class="form-control"  id="content" placeholder="个人简介">
             </div>
           </div>
 		  
@@ -98,10 +158,18 @@
   //初始化表单数据
   function doInitEditFormData(rowData){
 	$("#name").val(rowData.name);  
-	$("#dtName").val(rowData.dtName);  
-	$("#createTime").val(rowData.createTime);  
-	$("#dtBz").val(rowData.dtBz);  
-	
+	$("#sex").val(rowData.sex);  
+	$("#age").val(rowData.age);  
+	$("#born").val(rowData.born);  
+	$("#job").val(rowData.job);  
+	$("#specialty").val(rowData.specialty);  
+	$("#experience").val(rowData.experience);  
+	$("#Culture").val(rowData.Culture);  
+	$("#afterSchool").val(rowData.afterSchool);  
+	$("#tel").val(rowData.tel);  
+	$("#address").val(rowData.address);  
+	$("#createtime").val(rowData.createtime);  
+	$("#content").val(rowData.content);  
   }
   //回到列表页面
   function doCancel(){
@@ -132,9 +200,18 @@
   function doGetEditFormData(){
 	  var params={
 	     "name":$("#name").val(),
-	     "dtName":$("#dtName").val(),
-	     "createTime":$("#createTime").val(),
-	     "dtBz":$("#dtBz").val()
+	     "sex":$("#sex").val(),
+	     "age":$("#age").val(),
+	     "born":$("#born").val(),
+	     "job":$("#job").val(),
+	     "specialty":$("#specialty").val(),
+	     "experience":$("#experience").val(),
+	     "Culture":$("#Culture").val(),
+	     "afterSchool":$("#afterSchool").val(),
+	     "tel":$("#tel").val(),
+	     "address":$("#address").val(),
+	     "createtime":$("#createtime").val(),
+	     "content":$("#content").val()
 	  }
 	  return params;
   }
