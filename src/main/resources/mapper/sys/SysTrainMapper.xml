@@ -9,12 +9,12 @@
 		id,tn_man tnMan,tn_content tnContent,
 		tn_time tnTime,tn_address tnAddress,
 		tn_join tnJoin,tn_bz tnBz,tn_title tnTitle
-		from tb_train
+		from sys_train
 	</select>
 
 	<!-- 插入一条培训数据 -->
 	<insert id="addTrainObject">
-		insert into tb_train 
+		insert into sys_train 
 		(id,tn_man,tn_content,tn_time,tn_address,tn_join,tn_bz,tn_title) 
 		values
 		(null,#{tnMan},#{tnContent},#{tnTime},#{tnAddress},#{tnJoin},#{tnBz},#{tnTitle})
@@ -25,13 +25,13 @@
 		id,tn_man tnMan,tn_content tnContent,
 		tn_time tnTime,tn_address tnAddress,
 		tn_join tnJoin,tn_bz tnBz,tn_title tnTitle
-		from tb_train
+		from sys_train
 		where id=#{id}
 	</select>
 	<!-- 根据id删除培训信息  -->
 	<delete id="deleteTrainObjectById">
 		delete
-		from tb_train
+		from sys_train
 		where id=#{id}
 	</delete>
 </mapper>

@@ -9,9 +9,8 @@ import com.cy.sys.pojo.SysDepartment;
 
 @Service
 public interface SysDepartmentService {
-	PageObject<SysDepartment> findPageObjects(
-			String name,Integer pageCurrent);
-	int saveObject(SysDepartment entity);
+	/**保存部门信息*/
+	int saveDeptObject(SysDepartment entity);
 	
 	
 	

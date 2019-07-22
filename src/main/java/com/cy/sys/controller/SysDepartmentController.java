@@ -17,20 +17,11 @@ public class SysDepartmentController {
 	@Autowired
 	private SysDepartmentService sysDepartmentService;
 	
-	@RequestMapping("doFindPageObjects")
-	public JsonResult doFindPageObjects(
-			String username,Integer pageCurrent) {
-		PageObject<SysDepartment> po=
-				sysDepartmentService.findPageObjects(
-						username,pageCurrent);
-		return new JsonResult(po);
-	}
-	@RequestMapping("doSaveObject")
-	@ResponseBody
-	public JsonResult doSaveObject(SysDepartment entity){
-		sysDepartmentService.saveObject(entity);
+	/**添加部门信息*/
+	@RequestMapping("doSaveObjects")
+	public JsonResult doFindPageObjects(SysDepartment entity) {
+		sysDepartmentService.saveDeptObject(entity);
 		return new JsonResult("save ok");
 	}
-	
 
 }
