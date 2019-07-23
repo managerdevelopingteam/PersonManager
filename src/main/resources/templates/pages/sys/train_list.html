@@ -8,7 +8,7 @@
 				<div class="box-tools" align="right">
 					<div class="input-group input-group-sm" style="width: 350px;">
 						<input type="text" name="table_search" id="searchNameId"
-							class="form-control pull-right" placeholder="角色名">
+							class="form-control pull-right" placeholder="培训人">
 
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-default btn-search">
@@ -63,16 +63,19 @@
 	   var title;
 	   if($(this).hasClass('btn-add')){
 		   title="添加信息";
+		   $("mainContent").data("title",title);
+		   $("#mainContentId").removeData("rowData");
 		   doLoadPageUI(title);
 	   }else{
 		   title="详查"
+		   $("#mainContent").data("title",title);
 		   var id=$(this).parents("tr").data("id");
 		   var params={"id":id};
-		   var url="train/doFindObjectByTnMan";
+		   var url="train/doFindObjectById";
 		   $.getJSON(url,params,function(result){
 			   if(result.state==1){
 				  result.data.id=id;//在结果中动态追加id
-				  $("#mainContentId").data("data",result.data);
+				  $("#mainContentId").data("rowData",result.data);
 				  doLoadPageUI(title);//异步加载页面  
 			   }else{
 				  alert(result.message); 

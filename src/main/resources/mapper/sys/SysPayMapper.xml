@@ -3,26 +3,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cy.sys.dao.SysPayDao">
 
-	<!-- 查询记录总数 -->
-	
+	<sql id="queryWhereId">
+		<where>
+			<if test="payEmName!=null and payEmName!=''">
+				payEmName like concat ("%",#{payEmName},"%")
+			</if>
+		</where>
+	</sql>
+	<select id="getRowCounts" resultType="int">
+		select count(*)
+		from sys_pay
+		<include refid="queryWhereId" />
+	</select>
 	<!-- 查询表中所有数据 -->
-	<select id="findObjects" resultType="com.cy.sys.pojo.SysPay">
-		select id,pay_emNumber payEmNumber,pay_EmName payEmName,
-				pay_month payMonth,pay_baseMoney payBaseMoney,
-				pay_overtime PayOverTime,pay_age payAge,
-				pay_check payCheck,pay_absent payAbsent,
-				pay_safety paySafety
-		from sys_pay;
+	<select id="findPageObjects" resultType="com.cy.sys.pojo.SysPay">
+		select * from sys_pay
+		<include refid="queryWhereId" />
+		limit #{startIndex},#{pageSize};
 	</select>
 	<!-- 根据年月查询表中所有数据 -->
 	<select id="findObjectsByMonth" resultType="com.cy.sys.pojo.SysPay">
-		select id,pay_emNumber payEmNumber,pay_EmName payEmName,
-				pay_month payMonth,pay_baseMoney payBaseMoney,
-				pay_overtime PayOverTime,pay_age payAge,
-				pay_check payCheck,pay_absent payAbsent,
-				pay_safety paySafety
-		from sys_pay
-		where pay_month=#{payMonth};
+		select * from sys_pay
+		where payMonth=#{payMonth};
 	</select>
 	<!-- 根据id删除记录 -->
 	<delete id="deleteObjectById">
@@ -30,21 +32,32 @@
 	</delete>
 	<!-- 根据名称模糊查询表中所有数据 -->
 	<select id="findObjectsByName" resultType="com.cy.sys.pojo.SysPay">
-		select id,pay_emNumber payEmNumber,pay_emName payEmName,
-				pay_month payMonth,pay_baseMoney payBaseMoney,
-				pay_overtime PayOverTime,pay_age payAge,
-				pay_check payCheck,pay_absent payAbsent,
-				pay_safety paySafety
+		select *
 		from sys_pay
-		where pay_emName like concat("%",#{payEmName},"%")
+		where payEmName like concat("%",#{payEmName},"%")
 	</select>
 	<!-- 查询编号，姓名 -->
-	<select id="findObjectsByEmployee" resultType="com.cy.sys.pojo.Node">
+	<!-- <select id="findObjectsByEmployee" resultType="com.cy.sys.pojo.Node">
 		select sys_employee.id,sys_employee.emSerialNumber ,sys_employee.emName ,c.em_numberName
 		from sys_employee,(select id sys_employeeId,concat(concat(emSerialNumber,' '),emName) em_numberName from sys_employee) c
 		where sys_employee.id=c.sys_employeeId;
-	</select>
+	</select> -->
 	
-       
-      
+       <!-- <select id="findObjects" resultType="com.cy.sys.pojo.SysPay">
+		select id,payEmNumber,payEmName,
+				payMonth,payBaseMoney,
+				PayOverTime,payAge,
+				payCheck,payAbsent,
+				paySafety,getMoney
+		from sys_pay;
+		
+	</select> -->
+      <!-- 添加数据 -->
+      <insert id="addObject">
+      	insert into sys_pay
+      	(payEmNumber,payEmName,payMonth,payBaseMoney,payOverTime,payAge,payCheck,payAbsent,paySafety,getMoney)
+      	values
+      	(#{payEmNumber},#{payEmName},#{payMonth},#{payBaseMoney},#{payOverTime},#{payAge},#{payCheck}
+      	,#{payAbsent},#{paySafety},#{getMoney})
+      </insert>
 </mapper>

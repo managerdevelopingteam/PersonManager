@@ -13,7 +13,7 @@ public class SysTrain implements Serializable{
 	private String tnMan;
 	private String tnTitle;
 	private String tnContent;
-	private String tnTime;
+	private String createTime;
 	private String tnAddress;
 	private String tnJoin;
 	private String tnBz;

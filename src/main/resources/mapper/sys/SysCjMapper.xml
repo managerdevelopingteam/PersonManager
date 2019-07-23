@@ -2,71 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cy.sys.dao.SysCjDao">
+
+	<!-- 删除数据在SysCjDao类中使用注解定义  -->
+	<!-- 提取部分 -->
 	<sql id="queryWhereId">
 		<where>
 			<if test="cjTitle!=null and cjTitle!=''">
-				cjTitle like concat ("%",#{cjTitle},"%")
+				cjTitle like concat("%",#{cjTitle},"%")
 			</if>
 		</where>
 	</sql>
+	
+	<!-- 根据奖惩主题模糊查询全部数据 -->
 	<select id="findPageObjects" resultType="com.cy.sys.pojo.SysCj">
 		select id,cjTitle,cjType,cjContent,cjMoney,createTime from sys_cj
 		<include refid="queryWhereId" />
-		order by createTime desc
+		order by id asc
 		limit #{startIndex},#{pageSize}
 	</select>
+	
+	<!-- 查询全部记录 -->
 	<select id="getRowCounts" resultType="int">
 		select count(*)
 		from sys_cj
 		<include refid="queryWhereId" />
 	</select>
+	
+	<!-- 添加数据 -->
 	<insert id="insertObject" parameterType="com.cy.sys.pojo.SysCj">
 		insert into sys_cj
-		(id,name,cjTitle,cjType,cjContent,cjMoney,createTime)
+		(id,cjTitle,cjType,cjContent,cjMoney,createTime)
 		values
-		(null,#{name},#{cjTitle},#{cjType},#{cjContent},#{cjMoney},#{createTime})
+		(null,#{cjTitle},#{cjType},#{cjContent},#{cjMoney},#{createTime})
 	</insert>
-
-
-	<!-- 查询表中所有数据 -->
-	<select id="findObjects" resultType="com.cy.sys.pojo.SysCj">
-
-		select id, cjTitle, cjType,
-		cjContent,
-		cjMoney,createTime
-		from sys_cj;
-	</select>
-	<!-- 向表中添加新数据 -->
-	<insert id="addCjObject">
-		insert into sys_cj
-		(cjTitle, cjType,
-		cjContent,cjMoney,createTime)
-		values
-		(#{cjTitle},#{cjType},#{cjContent},#{cjMoney},#{createTime})
-	</insert>
-	<!-- 根据奖惩主题模糊查询 -->
-	<select id="findObject"
-		resultType="com.cy.sys.pojo.SysCj">
-		select id,cjTitle,cjType,cjContent,cjMoney,createTime
-		from sys_cj
-		where cjTitle like concat ("%",#{cjTitle},"%")
-	</select>
-	<!-- 根据id删除记录 -->
-	<delete id="deleteObjectById">
-		delete
-		from sys_cj
-		where id=#{id}
-	</delete>
-	<!--通过cjTitle（奖惩主题）修改信息 -->
-	<update id="updateByCjTitle">
+	
+	<!-- 修改数据 -->
+	<update id="updateObject">
 		update sys_cj
 		set cjTitle=#{cjTitle},
 		cjType=#{cjType},
 		cjContent=#{cjContent},
 		cjMoney=#{cjMoney},
-		createTime=#{parentId},
+		createTime=#{createTime}
 		where id=#{id}
 	</update>
-
 
 </mapper>

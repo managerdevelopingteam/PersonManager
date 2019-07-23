@@ -8,7 +8,7 @@
 				<div class="box-tools" align="right">
 					<div class="input-group input-group-sm" style="width: 350px;">
 						<input type="text" name="table_search" id="searchNameId"
-							class="form-control pull-right" placeholder="角色名">
+							class="form-control pull-right" placeholder="员工姓名">
 
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-default btn-search">
@@ -25,6 +25,7 @@
 				  <table class="table table-hover">
 					<thead>
 						<tr>
+						    <th>id</th>
 						    <th>员工编号</th>
 							<th>员工姓名</th>
 							<th>当前月份</th>
@@ -52,9 +53,9 @@
 </div>
 <script type="text/javascript">
    $(function(){
-	  $("#pageId").load("doPageUI",function(){
-		  doGetObjects();
-	  });
+	   $("#pageId").load("doPageUI",function(){
+			  doGetObjects();
+		  });
 	  $(".input-group-btn")
 	  .on("click",".btn-search",doQueryObjects)
 	  .on("click",".btn-add",doLoadEditUI)
@@ -96,7 +97,9 @@
    
    function doDeleteObject(){
 	   //1.params
+	  //debugger
 	   var id=$(this).parents("tr").data("id");
+	  if(!confirm("确定删除吗"))return;
 	   var params={"id":id};
 	   //2.url
 	   var url="pay/doDeleteObject"
@@ -109,23 +112,26 @@
 			   alert(result.message);
 		   }
 	   })
-	   
+	   $("#pageId").data("pageCurrent",1);
+	   doGetObjects();
    }
    function doQueryObjects(){
 	   $("#pageId").data("pageCurrent",1);
 	   doGetObjects();
    }
    function doGetObjects(){
+	   
 	   //1.params
 	   //获取在Page.html中绑定的当前页码值
+	   //debugger
 	   var pageCurrent=$("#pageId").data("pageCurrent");
 	   //假如没有值,设置初始值为1
 	   if(!pageCurrent)pageCurrent=1;
 	   //var params="pageCurrrent="+pageCurrent;
 	   var params={"pageCurrent":pageCurrent};
 	   //获取查询时用户输入的名字
-	   var name=$("#searchNameId").val(); 
-	   if(name)params.emName=name; 
+	   var payEmName=$("#searchNameId").val(); 
+	   if(payEmName)params.payEmName=payEmName; 
 	   //2.url
 	   var url="pay/doFindPageObjects";
 	   //3.ajax request
@@ -137,6 +143,8 @@
    function doHandleResponseResult(result){
 	   
 	   if(result.state==1){
+		   console.log(result)
+		   //debugger
 		  doSetTableBodyRows(result.data.records);
 		  doSetPagination(result.data);
 	   }else{
@@ -161,35 +169,39 @@
    }
    function doSetTableBodyRows(records){
 	   
-	  //获取tbody对象,并清空
+
+	   //1.获取tbody对象,并清空
 	   var tBody=$("#tbodyId");
 	   tBody.empty();
-	   //2.迭代数据,并追加到tBody
+	   //2.将记录records进行呈现
+	   //2.1迭代记录集
 	   for(var i in records){
-		  //2.1构建tr对象
-		  var tr=$("<tr></tr>");
-		  tr.data("id",records[i].id);
-		  //2.2构建tds对象
-		  var tds=doCreateTds(records[i],i);
-		  //2.3将tds对象追加到tr中
-		  tr.append(tds);
-		  //2.4将tr追加到tbody中
-		  tBody.append(tr);
+		   //2.1构建tr对象
+			  var tr=$("<tr></tr>");
+			 tr.data("id",records[i].id);
+			  //2.2构建tds对象
+			  var tds=doCreateTds(records[i]);
+			  //2.3将tds对象追加到tr中
+			  tr.append(tds);
+			  //2.4将tr追加到tbody中
+			  tBody.append(tr);
 	   }
    }
    function doCreateTds(data){
+	   //debugger
 	   var tds=
-	   "<td>"+data.pay_emNumber+"</td>"+
-	   "<td>"+data.pay_emName+"</td>"+
-	   "<td>"+data.pay_month+"</td>"+
-	   "<td>"+data.pay_baseMoney+"</td>"+
-	   "<td>"+data.pay_overtime*20+"</td>"+
-	   "<td>"+data.pay_age*50+"</td>"+
-	   "<td>"+data.pay_check+"</td>"+
-	   "<td>"+data.pay_absent+"</td>"+
-	   "<td>"+data.pay_safety+"</td>"+
-	   "<td>"+data.pay_baseMoney+data.pay_overtime*20+data.pay_age*50+data.pay_check-data.pay_absent-data.pay_safety+"</td>"+
-	   "<td><a class='btn-delete'>删除</a>"+
+		   "<td>"+data.id+"</td>"+
+	   "<td>"+data.payEmNumber+"</td>"+
+	   "<td>"+data.payEmName+"</td>"+
+	   "<td>"+data.payMonth+"</td>"+
+	   "<td>"+data.payBaseMoney+"</td>"+
+	   "<td>"+data.payOverTime+"</td>"+
+	   "<td>"+data.payAge+"</td>"+
+	   "<td>"+data.payCheck+"</td>"+
+	   "<td>"+data.payAbsent+"</td>"+
+	   "<td>"+data.paySafety+"</td>"+
+	   "<td>"+data.getMoney+"</td>"+
+	   "<td><a class='btn-delete'>删除</a></td>";
 	
        
        return tds;
