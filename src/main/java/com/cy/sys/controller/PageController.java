@@ -16,6 +16,10 @@ public class PageController {
 		//Thread.sleep(2000);
 		return "common/page";
 	}
+	@RequestMapping("doLoginUI")
+	public String doLoginUI(){
+			return "login";
+	}
 	@RequestMapping("sys/{page}")
 	public String doModuleUI(//rest
 			@PathVariable String page) {
