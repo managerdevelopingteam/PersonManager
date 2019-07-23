@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.sys.dao.SysEmployeeDao">
+
+
+	<!--添加员工信息 -->
+	<insert id="insertEmployee">
+		insert into sys_employee
+		(id,emSerialNumber,emName,emSex,emAge,emIDCard,emBorn,emNation,emMarriage,emVisage,emAncestralHome,emTel,emAddress,emAfterSchool,
+		emSpeciality,emCulture,emStartime,emDepartmentId,emTypeWork,createTime,em_bz)
+		values
+		(#{id},#{emSerialNumber},#{emName},#{emSex},#{emAge},#{emIDCard},#{emBorn},#{emNation},#{emMarriage},#{emVisage},#{emAncestralHome},
+		#{emTel},#{emAddress},#{emAfterSchool},#{emSpeciality},#{emCulture},#{emStartime},#{emDepartmentId},#{emTypeWork},#{emCreatime},#{emBz})
+	</insert>
+
+	<!-- 员工管理中查询员工信息 -->
+	<select id="findObjectById"
+		resultType="com.cy.sys.pojo.SysEmployee">
+		select
+		id,emSerialNumber,emName,emSex,emAge,emIDCard,emBorn,emNation,emMarriage,emVisage,emAncestralHome,emTel,emAddress,emAfterSchool,
+		emSpeciality,emCulture,emStartime,emDepartmentId,emTypeWork,createTime,em_bz
+		from sys_employee where id=#{id}
+	</select>
+
+	<!--根据id修改员工信息 -->
+	<update id="updateObject"
+		parameterType="com.cy.sys.pojo.SysEmployee">
+		update sys_employee set
+		emSerialNumber=#{emSerialNumber},emName=#{emName},emSex=#{emSex},emAge=#{emAge},emIDCard=#{emIDCard},emBorn=#{emBorn},
+		emNation=#{emNation},emMarriage=#{emMarriage},emVisage=#{emVisage},emAncestralHome=#{emAncestralHome},emTel=#{emTel},
+		emAddress=#{emAddress},emAfterSchool=#{emAfterSchool},emSpeciality=#{emSpeciality},emCulture=#{emCulture},emStartime=#{emStartime},
+		emDepartmentId=#{emDepartmentId},emTypeWork=#{emTypeWork},createTime=#{emCreatime},em_bz=#{emBz}
+		where id=#{id}
+	</update>
+	
+	<!-- 删除员工信息 -->
+	<delete id="deleteObjectById">
+		delete from sys_employee where id=#{id}
+	</delete>
+
+
+
+
+
+</mapper>
