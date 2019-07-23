@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cy.sys.dao.SysTrainDao">
-
 	<!-- 借助此元素对共性数据进行提取 -->
 	<sql id="queryWhereId">
 		<where>
@@ -34,12 +33,14 @@
 	
 	<!-- 插入一条培训数据 -->
 	<insert id="addTrainObject">
+
 		insert into sys_train
 		(id,tn_man,tn_content,tn_time,tn_address,tn_join,tn_bz,tn_title)
 		values
 		(null,#{tnMan},#{tnContent},#{tnTime},#{tnAddress},#{tnJoin},#{tnBz},#{tnTitle})
 	</insert>
 	<!-- 根据id查询培训的详细信息 -->
+
 	<select id="findTrainObjectById"
 		resultType="com.cy.sys.pojo.SysTrain">
 		select
@@ -51,7 +52,7 @@
 	<!-- 根据id删除培训信息 -->
 	<delete id="deleteTrainObjectById">
 		delete
-		from sys_train
+		from tb_train
 		where id=#{id}
 	</delete>
 </mapper>
