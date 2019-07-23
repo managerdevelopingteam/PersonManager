@@ -11,13 +11,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.cy.sys.pojo.JsonResult;
 import com.cy.sys.pojo.Node;
 import com.cy.sys.pojo.SysCj;
-import com.cy.sys.pojo.SysEmployee;
-import com.cy.sys.pojo.SysInviteJob;
+/*import com.cy.sys.pojo.SysEmployee;
+import com.cy.sys.pojo.SysInviteJob;*/
 import com.cy.sys.pojo.SysPay;
 import com.cy.sys.pojo.SysTrain;
 import com.cy.sys.service.SysCjService;
-import com.cy.sys.service.SysEmployeeService;
-import com.cy.sys.service.SysInviteJobService;
+/*import com.cy.sys.service.SysEmployeeService;
+import com.cy.sys.service.SysInviteJobService;*/
 import com.cy.sys.service.SysPayService;
 import com.cy.sys.service.impl.SysTrainServiceImpl;
 
@@ -30,13 +30,9 @@ public class CgbDbtmsCopyApplicationTests {
 	private SysCjService cj;
 	@Autowired
 	private SysPayService pay;
-	@Autowired
-	SysInviteJobService sysInviteJobService;
-	@Autowired
-	SysEmployeeService sysEmployeeService;
 
 	@Test
-	public void contextLoads() {		
+	public void contextLoads() {
 	}
 
 	/**
@@ -90,13 +86,7 @@ public class CgbDbtmsCopyApplicationTests {
 		System.out.println(rows);
 	}
 
-	@Test
-	public void findObjects() {
-		List<SysCj> findObjects = cj.findObjects();
-		for (SysCj sysCj : findObjects) {
-			System.out.println(sysCj.toString());
-		}
-	}
+	
 
 	@Test
 	public void insertCjObject() {
@@ -110,20 +100,9 @@ public class CgbDbtmsCopyApplicationTests {
 		System.out.println(rows);
 	}
 
-	@Test
-	public void fingObjectByCjTitle() {
-		List<SysCj> findObjectByCjTitle = cj.findObject("羽毛球");
-		for (SysCj sysCj : findObjectByCjTitle) {
-			System.out.println(sysCj.toString());
-		}
-	}
+	
 
-	@Test
-	public void deleteCjById() {
-		int rows = cj.deleteObjectById(100);
-		System.out.println(rows);
-	}
-
+	
 	@Test
 	public void findPayObjects() {
 		List<SysPay> findObjects = pay.findObjects();
@@ -160,37 +139,30 @@ public class CgbDbtmsCopyApplicationTests {
 	}
 	/**
 	 * 添加应聘信息
+	 * 
 	 * @return
 	 */
-	@Test
-	public void test() {		
-		SysInviteJob entity=new SysInviteJob();
-		entity.setName("李某N");
-		entity.setSex("女");
-		entity.setAge(18);
-		entity.setBorn("1999-5-3");
-		entity.setJob("Java运维");
-		entity.setSpecialty("软件工程");		
-		int rows = sysInviteJobService.saveInviteJobMes(entity);	
-		System.out.println("影响行数"+rows);
-				
-	}
-	
-	/**
-	 * 添加员工信息
-	 * @return
-	 */
-	@Test
-	public void test2() {		
-		SysEmployee entity=new SysEmployee();
-		entity.setEmSerialNumber(30);
-		entity.setEmName("刘某N");
-		entity.setEmSex("女");	
-		entity.setEmCreateName("admin1");
-		int rows = sysEmployeeService.saveObject(entity);	
-		System.out.println("影响行数"+rows);
-				
-	}
-	
+	/*
+	 * @Test public void test() { SysInviteJob entity=new SysInviteJob();
+	 * entity.setName("李某N"); entity.setSex("女"); entity.setAge(18);
+	 * entity.setBorn("1999-5-3"); entity.setJob("Java运维");
+	 * entity.setSpecialty("软件工程"); int rows =
+	 * sysInviteJobService.saveInviteJobMes(entity);
+	 * System.out.println("影响行数"+rows);
+	 * 
+	 * }
+	 * 
+	 *//**
+		 * 添加员工信息
+		 * 
+		 * @return
+		 *//*
+			 * @Test public void test2() { SysEmployee entity=new SysEmployee();
+			 * entity.setEmSerialNumber(30); entity.setEmName("刘某N"); entity.setEmSex("女");
+			 * entity.setEmCreateName("admin1"); int rows =
+			 * sysEmployeeService.saveObject(entity); System.out.println("影响行数"+rows);
+			 * 
+			 * }
+			 */
 
 }

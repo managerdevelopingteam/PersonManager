@@ -1,31 +1,28 @@
 package com.cy.sys.service;
 
+
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.cy.sys.pojo.PageObject;
 import com.cy.sys.pojo.SysCj;
 
+
 @Service
 public interface SysCjService {
-
-	PageObject<SysCj> findPageObjects(String cjTitle, Integer pageCurrent);
-
-	//int saveObject(SysCj entity);
-
-	// 查询表中所有数据
-	List<SysCj> findObjects();
-
-	// 向表中添加新数据
+	//根据奖惩主题模糊查询全部数据
+	PageObject<SysCj> findPageObjects(
+			@Param("cjTitle")String cjTitle,
+			@Param("pageCurrent")Integer pageCurrent);
+	//添加数据
 	int saveObject(SysCj entity);
-
-	// 根据奖惩主题模糊查询
-	List<SysCj> findObject(String cjTitle);
-
-	// 根据id删除记录
-	int deleteObjectById(Integer id);
-
-	// 更改表中数据
+	//修改数据
 	int updateObject(SysCj entity);
+	//根据id删除数据
+	int deleteObject(Integer id);
+	//根据id查询单条数据
+	List<SysCj> findObjectById(Integer id);
+	
 }

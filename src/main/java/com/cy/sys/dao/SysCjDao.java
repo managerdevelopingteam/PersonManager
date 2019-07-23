@@ -1,41 +1,32 @@
 package com.cy.sys.dao;
 
 import java.util.List;
-import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import com.cy.sys.pojo.SysCj;
 
+
+
 @Mapper
 public interface SysCjDao {
-	/*
-	 * int getRowCounts(@Param("name") String name); List<SysCj>findPageObjects(
-	 * 
-	 * @Param("name")String name,
-	 * 
-	 * @Param("startIndex")Integer startIndex,
-	 * 
-	 * @Param("pageSize")Integer pageSize); int insertObject(SysCj entity);
-	 */
-	int getRowCounts(@Param("cjTitle") String cjTitle);
-
-	// 查询表中所有数据
-	List<SysCj> findPageObjects(@Param("cjTitle") String cjTitle, @Param("startIndex") Integer startIndex,
-			@Param("pageSize") Integer pageSize);
-
-	// 向表中添加新数据
-	int addCjObject(SysCj entity);
-
-	// 根据奖惩主题模糊查询
-	List<SysCj> findObject(String cjTitle);
-
-	
-
-	// 根据id删除记录
-	int deleteObjectById(Integer id);
-
-	// 通过id修改信息
-	int updateByCjTitle(SysCj id);
+	int getRowCounts(@Param("cjTitle")String cjTitle);
+	//根据奖惩主题模糊查询全部数据
+	List<SysCj>findPageObjects(
+			@Param("cjTitle")String cjTitle,
+			@Param("startIndex")Integer startIndex,
+			@Param("pageSize")Integer pageSize);
+	//添加数据
+	int insertObject(SysCj entity);
+	//根据id删除数据
+	@Delete("delete from sys_cj where id=#{id}")
+	int deleteObject(Integer id);
+	//修改数据
+	int updateObject(SysCj entity);
+	@Select("select * from sys_cj where id=#{id}")
+	//根据id查询单条数据
+	List<SysCj> findObjectById(Integer id);
 }

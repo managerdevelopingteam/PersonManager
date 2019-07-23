@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cy.sys.pojo.JsonResult;
 import com.cy.sys.pojo.Node;
+import com.cy.sys.pojo.PageObject;
 import com.cy.sys.pojo.SysPay;
 import com.cy.sys.service.SysPayService;
 
@@ -16,13 +17,12 @@ import com.cy.sys.service.SysPayService;
 public class SysPayController {
 
 	@Autowired
-	SysPayService payService;
-
+	SysPayService payService; 
 	// 查询表中所有数据
 
 	@RequestMapping("doFindPageObjects")
-	public JsonResult doFindObjects() {
-		List<SysPay> Objects = payService.findObjects();
+	public JsonResult doFindPageObjects(String payEmName, Integer pageCurrent) {
+		PageObject<SysPay> Objects = payService.findPageObjects(payEmName, pageCurrent);
 		return new JsonResult(Objects);
 	}
 
@@ -52,4 +52,18 @@ public class SysPayController {
 		List<Node> findObjectsByEmployee = payService.findObjectsByEmployee();
 		return new JsonResult(findObjectsByEmployee);
 	}
+	
+	public JsonResult doFindObjects() {
+		List<SysPay> Objects = payService.findObjects();
+		return new JsonResult(Objects);
+	}
+	
+	//添加数据
+	@RequestMapping("doSaveObject")
+	public JsonResult doSaveObject(SysPay entity) {
+		payService.saveObject(entity);
+		return new JsonResult("insert ok");
+		
+	}
+	//
 }
