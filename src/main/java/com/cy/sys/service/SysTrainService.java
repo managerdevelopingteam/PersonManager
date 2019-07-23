@@ -1,7 +1,6 @@
 package com.cy.sys.service;
 
-import java.util.List;
-
+import com.cy.sys.pojo.PageObject;
 import com.cy.sys.pojo.SysTrain;
 
 public interface SysTrainService {
@@ -9,7 +8,7 @@ public interface SysTrainService {
 	 * 查询所有培训记录
 	 * @return 返回list<Train>封装查询到的数据
 	 */
-	public List<SysTrain> findObjects();
+	PageObject<SysTrain> findPageObjects(String tnMan,Integer pageCurrent);
 	/**
 	 * 添加一条培训记录
 	 * @param train 封装添加的培训信息

@@ -7,14 +7,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.cy.sys.pojo.JsonResult;
 import com.cy.sys.pojo.Node;
+import com.cy.sys.pojo.PageObject;
 import com.cy.sys.pojo.SysCj;
-import com.cy.sys.pojo.SysDepartment;
-import com.cy.sys.pojo.SysEmployee;
-import com.cy.sys.pojo.SysInviteJob;
 import com.cy.sys.pojo.SysPay;
 import com.cy.sys.pojo.SysTrain;
 import com.cy.sys.service.SysCjService;
@@ -22,13 +19,13 @@ import com.cy.sys.service.SysDepartmentService;
 import com.cy.sys.service.SysEmployeeService;
 import com.cy.sys.service.SysInviteJobService;
 import com.cy.sys.service.SysPayService;
-import com.cy.sys.service.impl.SysTrainServiceImpl;
+import com.cy.sys.service.SysTrainService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CgbDbtmsCopyApplicationTests {
 	@Autowired
-	private SysTrainServiceImpl TrainDao;
+	private SysTrainService TrainDao;
 	@Autowired
 	private SysCjService cj;
 	@Autowired
@@ -53,9 +50,10 @@ public class CgbDbtmsCopyApplicationTests {
 		 */
 		@Test
 		public void trainFindObjects() {
-			List<SysTrain> list = TrainDao.findObjects();
-			for (SysTrain train : list) {
-				System.out.println(train.toString());
+			PageObject<SysTrain> findPageObjects = TrainDao.findPageObjects("", 1);
+			List<SysTrain> records = findPageObjects.getRecords();
+			for (SysTrain sysTrain : records) {
+				System.out.println(sysTrain.toString());
 			}
 		}
 	
@@ -68,7 +66,7 @@ public class CgbDbtmsCopyApplicationTests {
 			// train.setId(2);
 			train.setTnMan("赵帅");
 			train.setTnJoin("张三,李四");
-			train.setTnTime("2019-7-18");
+			train.setCreateTime("2019-7-18");
 			train.setTnBz("指导大家峰会前的业务分配");
 			train.setTnContent("让大家知道自己做什么工作");
 			train.setTnTitle("项目峰会指导");

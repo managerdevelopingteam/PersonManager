@@ -268,8 +268,8 @@ desired effect
             <li><a id="load-menu-id">添加员工信息</a></li>
             <li><a id="load-role-id">招聘管理</a></li>
             <li><a id="load-role-id">添加应聘信息</a></li>
-            <li><a id="load-user-id">培训管理</a></li>
-            <li><a id="load-user-id">制定培训计划</a></li>
+            <li><a id="load-train-id">培训管理</a></li>
+            <li><a id="load-addtrain-id">制定培训计划</a></li>
             <li><a id="load-department-id"> 部门管理</a></li>
             <li><a id="load-adddepartment-id">添加部门信息</a></li>
             <li><a id="load-pwd-id">薪资管理</a></li>
@@ -424,6 +424,8 @@ desired effect
 	  doLoadUI("load-addcj-id","sys/cj_edit");
 	  doLoadUI("load-department-id","sys/department_list");
 	  doLoadUI("load-adddepartment-id","sys/department_edit");
+	  doLoadUI("load-train-id","sys/train_list");
+	  doLoadUI("load-addtrain-id","sys/train_edit");
   })
   function doLoadUI(id,url){
 	  $("#"+id).click(function(){
