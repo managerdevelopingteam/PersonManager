@@ -12,12 +12,15 @@ import com.cy.sys.pojo.JsonResult;
 @RequestMapping("/user/")
 public class SysUserController {
 	@RequestMapping("doLogin")
-	public JsonResult doLogin(String username,String password) {
+	public JsonResult doLogin(String username,String password,boolean isRememberMe) {
 		//获取Subject对象
 		Subject subject = SecurityUtils.getSubject();
 		//通过Subject对象提交用户信息,交给shiro框架进行认证操作
 		//对用户进行封装
 		UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+		if(isRememberMe) {
+			token.setRememberMe(true);
+		}
 		//对用户信息进行身份验证
 		subject.login(token);
 		//分析:
